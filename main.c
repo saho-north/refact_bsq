@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:58:38 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 08:13:14 by louisnop         ###   ########.fr       */
+/*   Updated: 2023/08/10 07:09:29 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(char ***map)
 {
-	long int i;
+	long int	i;
 
 	i = 0;
 	while ((*map)[i])
@@ -44,7 +44,7 @@ char	*ft_read(int ifd)
 	return (content);
 }
 
-int		ft_main_1(void)
+int	ft_main_1(void)
 {
 	char	*content;
 	char	**map;
@@ -67,7 +67,7 @@ int		ft_main_1(void)
 	return (SUCCESS);
 }
 
-int		ft_main_2(int argc, char *argv[], int i)
+int	ft_main_2(int argc, char *argv[], int i)
 {
 	int		ifd;
 	char	*content;
@@ -96,9 +96,9 @@ int		ft_main_2(int argc, char *argv[], int i)
 	return (SUCCESS);
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	int i;
+	int	i;
 
 	if (argc < 2)
 	{
