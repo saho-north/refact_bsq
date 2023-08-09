@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_validate_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 22:48:35 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 03:29:16 by sakitaha         ###   ########.fr       */
+/*   Updated: 2020/01/30 07:19:14 by louisnop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int	ft_validate_1(char **map, t_info *info)
+int		ft_validate_1(char **map, t_info *info)
 {
 	if (!(map[0] && map[1]))
 		return (FAIL);
@@ -23,10 +23,10 @@ int	ft_validate_1(char **map, t_info *info)
 	return (SUCCESS);
 }
 
-int	ft_validate_2(char **map, t_info *info)
+int		ft_validate_2(char **map, t_info *info)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	while (map[++i])
@@ -41,10 +41,10 @@ int	ft_validate_2(char **map, t_info *info)
 	return (SUCCESS);
 }
 
-int	ft_validate_3(char **map, t_info *info)
+int		ft_validate_3(char **map, t_info *info)
 {
-	int	i;
-	int	len;
+	int i;
+	int len;
 
 	i = 1;
 	len = ft_strlen(map[i]);
@@ -59,9 +59,9 @@ int	ft_validate_3(char **map, t_info *info)
 	return (SUCCESS);
 }
 
-int	ft_validate_4(char *content)
+int		ft_validate_4(char *content)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (content[i] != '\0')
@@ -71,7 +71,7 @@ int	ft_validate_4(char *content)
 	return (SUCCESS);
 }
 
-int	ft_validate(char **map, t_info *info)
+int		ft_validate(char **map, t_info *info)
 {
 	if (ft_validate_1(map, info) == FAIL)
 		return (FAIL);

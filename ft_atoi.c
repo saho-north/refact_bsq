@@ -3,23 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 18:51:43 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 03:27:34 by sakitaha         ###   ########.fr       */
+/*   Updated: 2020/01/30 06:26:45 by louisnop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isspace(char c)
 {
-	return ((c == ' ' || ('\t' <= c && c <= '\r')));
+	if (c == ' ' ||
+		c == '\n' ||
+		c == '\t' ||
+		c == '\v' ||
+		c == '\f' ||
+		c == '\r')
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }
 
 int	ft_atoi(char *str)
 {
-	int	res;
-	int	sign;
-	int	i;
+	int res;
+	int sign;
+	int i;
 
 	res = 0;
 	sign = 0;

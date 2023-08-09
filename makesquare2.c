@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   makesquare2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: louisnop <louisnop@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 21:46:00 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 00:39:34 by sakitaha         ###   ########.fr       */
+/*   Updated: 2020/01/30 02:37:11 by louisnop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-extern int	g_max;
-extern int	g_col;
-extern int	g_row;
+extern	int g_max;
+extern	int g_col;
+extern	int g_row;
 
-int	ft_check_2(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
+int		ft_check_2(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i <= p_tempcrs->size)
 	{
-		if (ft_check_1(map, p_tempcrs->col + i, p_tempcrs->row
-				+ p_tempcrs->size, p_info) == 0)
+		if (ft_check_1(map, p_tempcrs->col + i,
+		p_tempcrs->row + p_tempcrs->size, p_info) == 0)
 		{
 			return (0);
 		}
@@ -33,8 +33,8 @@ int	ft_check_2(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
 	i = 0;
 	while (i <= p_tempcrs->size)
 	{
-		if (ft_check_1(map, p_tempcrs->col + p_tempcrs->size, p_tempcrs->row
-				+ i, p_info) == 0)
+		if (ft_check_1(map, p_tempcrs->col + p_tempcrs->size,
+		p_tempcrs->row + i, p_info) == 0)
 			return (0);
 		i++;
 	}
@@ -58,8 +58,8 @@ void	ft_check_3(char **map, t_tempcrs *p_tempcrs, t_info *p_info)
 
 void	ft_put_map(char **map, t_info *p_info)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 1;
 	while (i <= p_info->num_rows)
@@ -101,7 +101,7 @@ void	ft_change_map(char **map, t_info *p_info)
 
 void	ft_make_map(char **map, t_info *p_info)
 {
-	t_tempcrs	*p_tempcrs;
+	t_tempcrs *p_tempcrs;
 
 	g_max = 0;
 	g_col = 0;
@@ -113,7 +113,8 @@ void	ft_make_map(char **map, t_info *p_info)
 		p_tempcrs->col = 0;
 		while (p_tempcrs->col < ft_map_colsize(map))
 		{
-			if (ft_check_1(map, p_tempcrs->col, p_tempcrs->row, p_info) == 1)
+			if (ft_check_1(map, p_tempcrs->col,
+			p_tempcrs->row, p_info) == 1)
 			{
 				ft_check_3(map, p_tempcrs, p_info);
 			}

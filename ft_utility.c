@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utility.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 13:44:48 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 00:39:14 by sakitaha         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:46:31 by louisnop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+int		ft_strlen(char *str)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (str[i])
@@ -20,7 +20,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_is_printable(char c)
+int		ft_is_printable(char c)
 {
 	if (c < 0x20 || c == 0x7f)
 		return (0);

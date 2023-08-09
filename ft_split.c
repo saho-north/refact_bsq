@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:59:31 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 00:39:07 by sakitaha         ###   ########.fr       */
+/*   Updated: 2020/01/30 00:56:51 by louisnop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		g_start = 0;
 int		g_end = 0;
 int		g_state = 0;
 
-int	ft_is_in_charset(char c, char *charset)
+int		ft_is_in_charset(char c, char *charset)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (charset[i])
@@ -31,10 +31,10 @@ int	ft_is_in_charset(char c, char *charset)
 	return (0);
 }
 
-int	ft_get_wc(char *str, char *charset)
+int		ft_get_wc(char *str, char *charset)
 {
-	int	wc;
-	int	state;
+	int wc;
+	int state;
 
 	wc = 0;
 	state = OUT;
@@ -66,7 +66,7 @@ void	ft_update_in_word(int i)
 
 void	ft_add_last_word(char **res, char *str, int i)
 {
-	int	j;
+	int j;
 
 	if (g_state == IN)
 	{
@@ -97,7 +97,7 @@ char	**ft_split(char *str, char *charset)
 		if (ft_is_in_charset(str[i], charset))
 		{
 			if (g_state == OUT)
-				continue ;
+				continue;
 			g_state = OUT;
 			res[g_word_index] = malloc(sizeof(char) * ((g_end - g_start) + 1));
 			j = -1;
