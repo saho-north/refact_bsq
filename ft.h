@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:30:46 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/10 07:09:32 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/11 02:09:04 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SUCCESS 1
 # define FAIL 0
 # define FT_ERR_MAP "map error\n"
+# define STDIN 0
 
 typedef struct s_bsq
 {

@@ -3,54 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: louisnop <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 18:51:43 by louisnop          #+#    #+#             */
-/*   Updated: 2020/01/30 06:26:45 by louisnop         ###   ########.fr       */
+/*   Updated: 2023/08/11 02:21:03 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isspace(char c)
+#include "ft.h"
+
+int	ft_isspace(int c)
 {
-	if (c == ' ' ||
-		c == '\n' ||
-		c == '\t' ||
-		c == '\v' ||
-		c == '\f' ||
-		c == '\r')
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+	return (c == ' ' || ('\t' <= c && c <= '\r'));
 }
 
 int	ft_atoi(char *str)
 {
-	int res;
-	int sign;
-	int i;
+	int	res;
+	int	minus_count;
 
 	res = 0;
-	sign = 0;
-	i = 0;
-	while (ft_isspace(str[i]))
-		i++;
-	while (str[i] == '+' || str[i] == '-')
+	minus_count = 0;
+	while (ft_isspace(*str))
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		if (str[i] == '-')
-			sign++;
-		i++;
+		if (*str == '-')
+			minus_count++;
+		str++;
 	}
-	while (str[i] != '\0' && (str[i] >= '0' && str[i] <= '9'))
+	while (*str >= '0' && *str <= '9')
 	{
-		res = res * 10 + (str[i] - '0');
-		i++;
+		res = res * 10 + *str - '0';
+		str++;
 	}
-	if (sign % 2 == 1)
+	if (minus_count % 2 == 1)
 		return (res * -1);
-	else
-		return (res);
+	return (res);
 }
