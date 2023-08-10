@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/01/28 13:12:23 by louisnop          #+#    #+#              #
-#    Updated: 2023/08/11 02:19:47 by sakitaha         ###   ########.fr        #
+#    Created: 2023/08/11 02:41:06 by sakitaha          #+#    #+#              #
+#    Updated: 2023/08/11 03:04:58 by sakitaha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,21 @@ TARGET = bsq
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+LDFLAGS += -fsanitize=address
+
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	-rm -f $(OBJS)
 
 fclean:
 	-rm -f $(TARGET) $(OBJS)
-
-re: fclean all
 
 test: test1 test2 test3
 
@@ -42,4 +43,7 @@ test2: $(TARGET)
 test3: $(TARGET)
 	./$(TARGET) ./maps/example_file1 ./maps/example_file2
 
+re: fclean all
+
 .PHONY: all clean re test1 test2 test fclean
+
