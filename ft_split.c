@@ -6,33 +6,23 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:59:31 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/11 05:20:14 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:55:00 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 
-int				g_word_index = 0;
-int				g_start = 0;
-int				g_end = 0;
-int				g_state = 0;
-
-char	*ft_strchr(const char *s, int c)
+static void	ft_free(char **res, size_t word_count)
 {
-	char	*str;
-	char	to_find;
+	size_t	i;
 
-	str = (char *)s;
-	to_find = (char)c;
-	while (*str)
+	i = 0;
+	while (res[i] && i < word_count)
 	{
-		if (*str == to_find)
-			return (str);
-		str++;
+		free(res[i]);
+		++i;
 	}
-	if (*str == to_find)
-		return (str);
-	return (NULL);
+	free(res);
 }
 
 static t_bool	ft_is_in_charset(char c, char *charset)
@@ -67,139 +57,114 @@ static size_t	ft_count_words(char *str, char *charset)
 	return (word_count);
 }
 
-void	ft_update_in_word(int i)
+static size_t	ft_strlen_not_charset(char *str, char *charset)
 {
-	if (g_state == OUT)
+	size_t	len;
+
+	len = 0;
+	while (*str && !ft_is_in_charset(*str, charset))
 	{
-		g_state = IN;
-		g_start = i;
-		g_end = i;
+		++len;
+		++str;
 	}
-	else
-		g_end = i;
+	return (len);
 }
 
-void	ft_add_last_word(char **res, char *str, int i)
+static char	*ft_add_line(char *str, char *charset, char **endpos)
 {
-	int	j;
+	char	*line;
+	size_t	index;
+	size_t	current_str_len;
 
-	if (g_state == IN)
+	current_str_len = ft_strlen_not_charset(str, charset);
+	line = malloc(sizeof(char) * (current_str_len + 1));
+	if (!line)
+		return (NULL);
+	index = 0;
+	while (*str && index < current_str_len)
 	{
-		res[g_word_index] = malloc(sizeof(char) * ((i - g_start) + 1));
-		j = -1;
-		while (g_start <= i)
-			res[g_word_index][++j] = str[g_start++];
-		res[g_word_index][++j] = '\0';
-		g_word_index++;
+		line[index] = *str;
+		++index;
+		++str;
 	}
-	res[g_word_index] = 0;
-	g_word_index = 0;
-	g_start = 0;
-	g_end = 0;
-	g_state = 0;
+	line[index] = '\0';
+	*endpos = str;
+	return (line);
 }
 
-static char	*ft_add_word(char **res, char *str, char **endpos)
+static char	**ft_initialize_split(char *str, char *charset, size_t *word_count)
 {
-	int	j;
+	char	**res;
 
-	res[g_word_index] = malloc(sizeof(char) * ((i - g_start) + 1));
-	j = -1;
-	while (g_start <= i)
-		res[g_word_index][++j] = str[g_start++];
-	res[g_word_index][++j] = '\0';
-	g_word_index++;
+	*word_count = ft_count_words(str, charset);
+	res = malloc(sizeof(char *) * (*word_count + 1));
+	return (res);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	char			**res;
-	char			*endpos;
-	int				j;
-	t_word_state	word_state;
-	size_t			word_count;
+	char	**res;
+	size_t	word_count;
 
-	word_count = ft_count_words(str, charset);
-	res = malloc(sizeof(char *) * (word_count + 1));
+	res = ft_initialize_split(str, charset, &word_count);
 	if (!res)
 		return (NULL);
-	word_state = OUT_OF_WORD;
-	while (*str)
-	{
-		if (ft_is_in_charset(*str, charset) && word_state == IN_WORD)
-		{
-			ft_add_word(res, str, &endpos);
-			word_state = OUT_OF_WORD;
-		}
-		else if (word_state == OUT_OF_WORD)
-		{
-			word_state = IN_WORD;
-			++word_count;
-		}
-		++str;
-	}
-	while (*str)
-	{
-		if (ft_is_in_charset(*str, charset))
-		{
-			if (g_state == OUT)
-				continue ;
-			g_state = OUT;
-			res[g_word_index] = malloc(sizeof(char) * ((g_end - g_start) + 1));
-			j = -1;
-			while (g_start <= g_end)
-				res[g_word_index][++j] = str[g_start++];
-			res[g_word_index][++j] = '\0';
-			g_word_index++;
-		}
-		else
-			ft_update_in_word(i);
-	}
-	ft_add_last_word(res, str, i);
+	ft_fill_res(res, str, charset, word_count);
+	res[word_count] = 0;
 	return (res);
 }
 
-static long	convert_num(const char *str, const char **endpos, bool is_negative)
+static void	ft_fill_res(char **res, char *str, char *charset, size_t word_count)
 {
-	long	num;
-	long	ov_div;
-	long	ov_mod;
+	size_t	word_index;
+	char	*endpos;
 
-	ov_div = LONG_MAX / 10;
-	ov_mod = LONG_MAX % 10;
-	if (is_negative)
-		ov_mod++;
-	num = 0;
-	while ('0' <= *str && *str <= '9')
+	word_index = 0;
+	while (*str && word_index < word_count)
 	{
-		if (num > ov_div || (num == ov_div && (*str - '0') > ov_mod))
+		if (!ft_is_in_charset(*str, charset))
 		{
-			if (!is_negative)
-				return (LONG_MAX);
-			else
-				return (LONG_MIN);
+			res[word_index] = ft_add_line(str, charset, &endpos);
+			if (!res[word_index])
+			{
+				ft_free(res, word_index);
+				return ;
+			}
+			str = endpos;
+			++word_index;
 		}
-		num = num * 10 + (*str - '0');
-		str++;
+		else
+			++str;
 	}
-	*endpos = str;
-	if (is_negative)
-		num *= -1;
-	return (num);
+	res[word_index] = 0;
+	while (*str && word_index < word_count)
+	{
+		if (!ft_is_in_charset(*str, charset))
+		{
+			res[word_index] = ft_add_line(str, charset, &endpos);
+			if (!res[word_index])
+			{
+				ft_free(res, word_index);
+				return (NULL);
+			}
+			str = endpos;
+			++word_index;
+		}
+		else
+			++str;
+	}
+	res[word_index] = 0;
 }
 
-long	ft_strtol(const char *str, const char **endpos)
+//長すぎるみたい
+char	**ft_split(char *str, char *charset)
 {
-	bool	is_negative;
+	char	**res;
+	char	*endpos;
+	size_t	word_count;
 
-	is_negative = false;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			is_negative = true;
-		str++;
-	}
-	return (convert_num(str, endpos, is_negative));
+	res = ft_initialize_split(str, charset, &word_count);
+	if (!res)
+		return (NULL);
+	return (res);
 }
