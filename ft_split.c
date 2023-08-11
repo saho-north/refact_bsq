@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:59:31 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/11 15:55:00 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:55:38 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	ft_free(char **res, size_t word_count)
 	while (res[i] && i < word_count)
 	{
 		free(res[i]);
+		res[i] = NULL;
 		++i;
 	}
 	free(res);
@@ -101,20 +102,8 @@ static char	**ft_initialize_split(char *str, char *charset, size_t *word_count)
 	return (res);
 }
 
-char	**ft_split(char *str, char *charset)
-{
-	char	**res;
-	size_t	word_count;
-
-	res = ft_initialize_split(str, charset, &word_count);
-	if (!res)
-		return (NULL);
-	ft_fill_res(res, str, charset, word_count);
-	res[word_count] = 0;
-	return (res);
-}
-
-static void	ft_fill_res(char **res, char *str, char *charset, size_t word_count)
+static t_bool	ft_fill_res(char **res, char *str, char *charset,
+		size_t word_count)
 {
 	size_t	word_index;
 	char	*endpos;
@@ -128,7 +117,7 @@ static void	ft_fill_res(char **res, char *str, char *charset, size_t word_count)
 			if (!res[word_index])
 			{
 				ft_free(res, word_index);
-				return ;
+				return (FALSE);
 			}
 			str = endpos;
 			++word_index;
@@ -137,33 +126,19 @@ static void	ft_fill_res(char **res, char *str, char *charset, size_t word_count)
 			++str;
 	}
 	res[word_index] = 0;
-	while (*str && word_index < word_count)
-	{
-		if (!ft_is_in_charset(*str, charset))
-		{
-			res[word_index] = ft_add_line(str, charset, &endpos);
-			if (!res[word_index])
-			{
-				ft_free(res, word_index);
-				return (NULL);
-			}
-			str = endpos;
-			++word_index;
-		}
-		else
-			++str;
-	}
-	res[word_index] = 0;
+	return (TRUE);
 }
 
 //長すぎるみたい
 char	**ft_split(char *str, char *charset)
 {
 	char	**res;
-	char	*endpos;
 	size_t	word_count;
 
 	res = ft_initialize_split(str, charset, &word_count);
+	if (!res)
+		return (NULL);
+	ft_fill_res(res, str, charset, word_count);
 	if (!res)
 		return (NULL);
 	return (res);
