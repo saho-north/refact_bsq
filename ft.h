@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:30:46 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/11 04:08:23 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:59:24 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define FAIL 0
 # define FT_ERR_MAP "map error\n"
 # define STDIN 0
+
+// typedef enum e_result_status
+// {
+// 	RESULT_SUCCESS,
+// 	RESULT_FAIL
+// }			t_result_status;
 
 typedef enum e_word_state
 {

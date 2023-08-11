@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:59:31 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 01:55:38 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 01:57:55 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ static t_bool	ft_fill_res(char **res, char *str, char *charset,
 	return (TRUE);
 }
 
-//長すぎるみたい
 char	**ft_split(char *str, char *charset)
 {
 	char	**res;
@@ -138,8 +137,7 @@ char	**ft_split(char *str, char *charset)
 	res = ft_initialize_split(str, charset, &word_count);
 	if (!res)
 		return (NULL);
-	ft_fill_res(res, str, charset, word_count);
-	if (!res)
+	if (!ft_fill_res(res, str, charset, word_count))
 		return (NULL);
 	return (res);
 }
