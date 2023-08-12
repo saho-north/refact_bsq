@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:58:38 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 11:55:05 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:57:45 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q bsq");
-// }
+__attribute__((destructor)) static void destructor()
+{
+	system("leaks -q bsq 1>&2");
+}
