@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:30:46 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 09:59:50 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:53:22 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,14 @@
 # define FT_BUFSIZ 320000
 # define IN 1
 # define OUT 0
-# define SUCCESS 1
-# define FAIL 0
 # define FT_ERR_MAP "map error\n"
 # define STDIN 0
 
-// typedef enum e_result_status
-// {
-// 	RESULT_SUCCESS,
-// 	RESULT_FAIL
-// }			t_result_status;
+typedef enum e_result
+{
+	FAIL,
+	SUCCESS
+}			t_result;
 
 typedef enum e_word_state
 {
@@ -79,15 +77,15 @@ char		*ft_strjoin(char *s1, char *s2);
 char		**ft_split(char *str, char *charset);
 int			ft_atoi(char *str);
 int			ft_isspace(int c);
-int			ft_validate_5(char **map);
 t_info		*ft_prse(char **map);
-int			ft_validate(char **map, t_info *info);
-int			ft_validate_4(char *content);
+t_result	ft_validate(char **map, t_info *info);
+t_result	ft_validate_4(char *content);
 void		set_tempcrs(t_tempcrs *p_tempcrs);
 int			ft_check_1(char **map, int col, int row, t_info *p_info);
 void		ft_make_map(char **map, t_info *p_info);
 void		set_bsq(t_bsq *p_bsq);
 int			ft_map_colsize(char **map);
 void		ft_free(char **src_to_free, size_t limit);
+t_result	ft_validate_5(char **map);
 
 #endif

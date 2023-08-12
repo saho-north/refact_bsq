@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:58:38 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 09:59:30 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 11:55:05 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_read(int ifd)
 	return (content);
 }
 
-int	ft_process_map(int ifd)
+t_result	ft_process_map(int ifd)
 {
 	char	*content;
 	char	**map;
@@ -55,8 +55,8 @@ int	ft_process_map(int ifd)
 
 int	ft_open_map_from_file(char *argv[], int i)
 {
-	int	ifd;
-	int	result;
+	int			ifd;
+	t_result	result;
 
 	ifd = open(argv[i], O_RDONLY);
 	if (ifd == -1)
