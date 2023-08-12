@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 10:30:46 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 01:59:24 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 09:59:50 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ char		*ft_strdup(char *src);
 char		*ft_strjoin(char *s1, char *s2);
 char		**ft_split(char *str, char *charset);
 int			ft_atoi(char *str);
+int			ft_isspace(int c);
 int			ft_validate_5(char **map);
 t_info		*ft_prse(char **map);
 int			ft_validate(char **map, t_info *info);
@@ -87,5 +88,6 @@ int			ft_check_1(char **map, int col, int row, t_info *p_info);
 void		ft_make_map(char **map, t_info *p_info);
 void		set_bsq(t_bsq *p_bsq);
 int			ft_map_colsize(char **map);
+void		ft_free(char **src_to_free, size_t limit);
 
 #endif

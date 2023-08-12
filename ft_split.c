@@ -6,25 +6,11 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 15:59:31 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/12 01:57:55 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 09:58:57 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-
-static void	ft_free(char **res, size_t word_count)
-{
-	size_t	i;
-
-	i = 0;
-	while (res[i] && i < word_count)
-	{
-		free(res[i]);
-		res[i] = NULL;
-		++i;
-	}
-	free(res);
-}
 
 static t_bool	ft_is_in_charset(char c, char *charset)
 {

@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: sakitaha <sakitaha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 18:51:43 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/11 02:21:03 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 09:07:26 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-
-int	ft_isspace(int c)
-{
-	return (c == ' ' || ('\t' <= c && c <= '\r'));
-}
 
 int	ft_atoi(char *str)
 {

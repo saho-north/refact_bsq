@@ -6,25 +6,11 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 02:58:38 by louisnop          #+#    #+#             */
-/*   Updated: 2023/08/11 03:05:17 by sakitaha         ###   ########.fr       */
+/*   Updated: 2023/08/12 09:59:30 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
-
-void	ft_free(char ***map)
-{
-	long int	i;
-
-	i = 0;
-	while ((*map)[i])
-	{
-		free((*map)[i]);
-		i++;
-	}
-	free(*map);
-	*map = NULL;
-}
 
 char	*ft_read(int ifd)
 {
@@ -62,7 +48,7 @@ int	ft_process_map(int ifd)
 	if (ft_validate(map, info) == FAIL)
 		return (FAIL);
 	ft_make_map(map, info);
-	ft_free(&map);
+	ft_free(map, SIZE_MAX);
 	free(info);
 	return (SUCCESS);
 }
